@@ -47,8 +47,8 @@ dataset
               ├─ train # 下面放训练集标签
               ├─ val # 下面放验证集标签
               
-我已经准备好了文件夹，将新的标注和图片放入即可，并修改data目录下的mice_data.yaml文件的train和val的绝对路径。
-如果需要增加新的class（如其它动物），请修改data目录下的mice_data.yaml文件的nc和names。
+我已经准备好了文件夹，将新的标注和图片放入即可，并修改data目录下的mouse_d.yaml文件的train和val的绝对路径。
+如果需要增加新的class（如其它动物），请修改data目录下的mouse_data.yaml文件的nc和names。
 我已经在model下建立了mouse.yaml配置文件。直接使用即可。
 预训练模型和我已经训练好的模型的下载链接：https://pan.baidu.com/s/1t9L2fdGU_0exbdafCpIkvg?pwd=mice 
 下载好后请将模型放入pts文件夹内。
@@ -84,3 +84,6 @@ resume的True或False代表是否从上次训练的模型继续训练，默认�
    该问题由lib导致，只能配置完环境后手动修改
 2. 报错：PermissionError: [Errno 13] Permission denied:
    解决方案：请使用绝对路径  
+3. 训练时报错：OSError: [WinError 1455] 页面文件太小，无法完成操作。
+   解决方案：https://blog.csdn.net/weixin_43817670/article/details/116748349
+   num_workers已经修改，如果仍然有问题请加大虚拟内存。
