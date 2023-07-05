@@ -8,8 +8,8 @@ https://blog.csdn.net/ECHOSON/article/details/117220445 这里是一个关于ana
 
 conda create -n yolo5 python==3.8.5
 conda activate yolo5
-conda install pytorch==1.10.0 torchvision torchaudio cudatoolkit=11.3 # 30系列以上显卡gpu版本pytorch安装指令
-pip install pycocotools-windows
+pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116
+pip install pycocotools
 
 #cd到yolov5代码的目录下
 pip install -r requirements.txt
@@ -73,6 +73,14 @@ resume的True或False代表是否从上次训练的模型继续训练，默认�
  检测视频文件
    python detect.py --weights pts/best_withouttail.pt --source file.mp4  # video
  检测一个目录下的文件
-  python detect.py --weights pts/best_withouttail.pt path/  # directory
+  python detect.py --weights pts/best_withouttail.pt --source path  # directory
 
 输出结果位于runs/detect文件夹中。
+
+
+# debug说明：
+1. 报错：AttributeError: 'Upsample' object has no attribute 'recompute_scale_factor'
+   解决方案： https://blog.csdn.net/weixin_43401024/article/details/124428432
+   该问题由lib导致，只能配置完环境后手动修改
+2. 报错：PermissionError: [Errno 13] Permission denied:
+   解决方案：请使用绝对路径  
