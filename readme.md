@@ -34,6 +34,14 @@ python change.py
 
 yolo格式的标注文件会在txt文件夹中生成。
 
+我们提供了一些便于使用的资料在这个链接中：https://pan.baidu.com/s/1p3QEjWfZUhvH5wL4u2RBqQ?pwd=mice 
+
+  --一个标注并划分完成的数据集
+  --一个未做标注的图片集（含770张图片，可用于进一步优化模型）
+  --来自DeepLabCut的俯视角小鼠数据集，含有姿态估计的标注信息
+  --yolo官方的预训练模型 yolov5l
+  --我们训练好的分别针对需要尾巴和不需要尾巴两种情况的模型
+
 # part3：模型训练
 将标记完成的数据按照下面的格式进行放置：
 
@@ -54,13 +62,13 @@ dataset
 下载好后请将模型放入pts文件夹内。
 执行下列代码运行程序即可：
 
-python train.py --epoch xx --batch-size x --resume True/False
+python train.py --epoch xx --batch-size x 
 
 或
 
 python train.py #默认epoch=5000，batchsize=16，可根据自己服务器情况选择，
 
-resume的True或False代表是否从上次训练的模型继续训练，默认为False，意外中断需要继续训练时请改为True
+参数中的resume(line 451)的True或False代表是否从上次训练的模型继续训练，默认为False，意外中断需要继续训练时请改为True
 
 # part4：模型使用
 训练完后，请从runs/train中找到最近训练的模型best.pt并将其放置于pts文件夹内。
