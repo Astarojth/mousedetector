@@ -1,0 +1,6 @@
+train: E:/Intellengence/yolov5-mask-42-master/mice_train/images/train
+val: E:/Intellengence/yolov5-mask-42-master/dataset
+
+nc: 1
+
+names: ['mouse']
