@@ -33,31 +33,36 @@ python change.py
 
 yolo格式的标注文件会在txt文件夹中生成。
 
-我们提供了一些便于使用的资料在这个链接中：https://pan.baidu.com/s/1p3QEjWfZUhvH5wL4u2RBqQ?pwd=mice 
+语义分割请使用transfer_seg文件夹下的这个代码：
 
-  --一个标注并划分完成的数据集
+python labelme2coco.py --json-dir jsons --save-dir txts --classes "mouse"
+
+我们提供了一些便于使用的资料在这个链接中：链接：https://pan.baidu.com/s/16XY9IcQbeczAdWVAkHheew?pwd=mice 
+
+  --一个标注并划分完成的目标检测数据集和一个语义分割数据集，解压缩后放入根目录即可使用
   --一个未做标注的图片集（含770张图片，可用于进一步优化模型）
   --来自DeepLabCut的俯视角小鼠数据集，含有姿态估计的标注信息
   --yolo官方的精度最高的预训练模型 yolov5x和yolov5x-seg
-  --我们训练好的分别针对需要尾巴和不需要尾巴两种情况的模型
+  --我们训练好的分别针对需要尾巴和不需要尾巴两种情况的模型（目标检测），含尾巴的语义分割模型
 
 # part3：模型训练
 将标记完成的数据按照下面的格式进行放置：
 
 dataset
        ├─ images
-       │    ├─ test # 下面放测试集图片
+       │    ├─ test # 下面放测试集图片，可选
        │    ├─ train # 下面放训练集图片
        │    └─ val # 下面放验证集图片
        └─ labels
-              ├─ test # 下面放测试集标签
+              ├─ test # 下面放测试集标签，可选
               ├─ train # 下面放训练集标签
               ├─ val # 下面放验证集标签
               
-我已经准备好了文件夹，将新的标注和图片放入即可，并修改data目录下的mouse_d.yaml文件的train和val的绝对路径。
+我已经准备好了文件夹，将网盘内的数据集解压后，对应把新的标注和图片放入即可，并修改data目录下的mouse_d.yaml文件的train和val的绝对路径。
 如果需要增加新的class（如其它动物），请修改data目录下的mouse_data.yaml文件的nc和names。
+如果是语义分割，请将网盘中的压缩包解压后放在根目录下，并用自己的标签与图片放入train2017中。
 我已经在model下建立了mouse.yaml配置文件。直接使用即可。
-预训练模型和我已经训练好的模型的下载链接：https://pan.baidu.com/s/1t9L2fdGU_0exbdafCpIkvg?pwd=mice 
+预训练模型和我已经训练好的模型也在网盘中
 下载好后请将模型放入pts文件夹内。
 执行下列代码运行程序即可：
 如：
@@ -88,6 +93,8 @@ python segment/train.py
  检测一个目录下的文件
   python detect.py --weights pts/best_withtail.pt --source path  # directory
 
+语义分割为：
+ python segment/predict.py --weight pts/best_seg.pts --source path
 输出结果位于runs/detect文件夹中。
 
 
